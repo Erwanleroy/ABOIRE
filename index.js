@@ -4,7 +4,7 @@ $(()=>{
 //https://randommer.io/
 
     /*à supprimer dès que la page est prête*/
-    $("#SandBox").load("lesJeux/jeNAiJamais.html")
+    //$("#SandBox").load("lesJeux/jeNAiJamais.html")
 
     $("#picolo").click(()=>{
         $("#SandBox").load("lesJeux/picolo.html")
