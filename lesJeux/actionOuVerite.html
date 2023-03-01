@@ -1,0 +1,93 @@
+<h1 class="truthDare" style="margin:2vh;">Truth Or Dare</h1>
+<div class="categoryTruthDare">
+    <input type="radio" class="btn-check" name="options-outlined" id="friendlyxx" autocomplete="off" checked>
+    <label class="btn btn-outline-warning friendly" for="friendlyxx">Entre amis 🍺 </label>
+    <input type="radio" class="btn-check" name="options-outlined" id="dirtyxx" autocomplete="off" >
+    <label class="btn btn-outline-danger dirty" for="dirtyxx">Entre ... amis 😏😏😏</label>
+    <!--Rajouter un nombre de gorgées max-->
+    <div>
+        <label for="nbrGorgee" id="labelNbGorgee" class="form-label">Nombre de gorgées max : 5</label>
+        <input type="range" class="form-range" min="3" max="10" step="0.1" id="nbrGorgee">
+    </div>
+</div>
+<button class="btn btn-success launchTruthDare" style="margin:2vh" type="button">On lance tout ca ?</button>
+
+<!--apres on fait la meme pour action ou verité-->
+
+<div class="choixTD" style="display:none">
+    <input type="radio" class="btn-check" name="choixJoueur" id="actionaxx" autocomplete="off" checked>
+    <label class="btn btn-outline-warning action" for="actionaxx">Action 💪 </label>
+    <input type="radio" class="btn-check" name="choixJoueur" id="veritaxx" autocomplete="off">
+    <label class="btn btn-outline-danger verite" for="veritaxx">Vérité ✔️</label>
+    <div>
+        <button class="btn btn-primary newQuestion" style="margin:2vh;" type="button">Nouvelle question ?</button>
+    </div>
+</div>
+
+<div id="laPhrase" style="display:none">
+    <h2 style="vertical-align: middle;">Action ou Vérité ?</h2>
+    <h4 class="nextPlayerTD">Prochain joueur : </h4>
+</div>
+
+<script>
+    $(()=>{ 
+
+        $("#nbrGorgee").val(5)
+        const randomPlayer = () => {
+            var players = localStorage.getItem("players")
+            if (players!==null) {
+                players = players.split("/")
+                players.splice(-1)
+            }
+            var player = players[Math.floor(Math.random() * players.length)]
+            localStorage.setItem("actualPlayer",player)
+            $("#laPhrase h4").text("Prochain joueur : "+player)
+        }
+        
+        $("#nbrGorgee").change(()=>{
+            $("#labelNbGorgee").text("Nombre de gorgées max : "+Math.floor($("#nbrGorgee").val()))
+        })
+
+        $(".launchTruthDare").click(()=>{
+            if($("#dirtyxx").is(":checked")){
+                localStorage.setItem("category","dirty")
+                $(".truthDare").text($(".truthDare").text()+"😏😏😏")
+            }else{
+                localStorage.setItem("category","friendly")
+                $(".truthDare").text($(".truthDare").text()+"🍺")
+            }
+            var players = localStorage.setItem("nbGorgee",Math.floor($("#nbrGorgee").val()))
+            $(".categoryTruthDare").remove()
+            $(".launchTruthDare").remove()
+            $(".choixTD").css("display","block")
+            $("#laPhrase").css("display","block")
+            randomPlayer()
+        })
+
+        $(".newQuestion").click(()=>{
+            var textToDisplay
+            var typeChosen
+            var ledefi
+            var nbGegor
+            if($("#actionaxx").is(":checked")){
+                typeChosen="dare"
+            }else {
+                typeChosen="truth"
+            }
+            var previousPlayer = localStorage.getItem("actualPlayer")
+            $.post("https://randommer.io/truth-dare-generator",{category:localStorage.getItem("category"),type:typeChosen})
+                .then(res=>{
+                    ledefi = res.text.toLowerCase().slice(0,-1)
+                    nbGegor = Math.floor(Math.random() * localStorage.getItem("nbGorgee")-2)
+                    nbGegor+=3
+                    textToDisplay = previousPlayer + " " 
+                    if(typeChosen=="truth"){
+                        textToDisplay += "say "
+                    }
+                    textToDisplay += ledefi + " or take "+ nbGegor +" penalty"
+                    $("#laPhrase h2").text(textToDisplay)
+                })
+            randomPlayer()
+        })
+    })
+</script>
