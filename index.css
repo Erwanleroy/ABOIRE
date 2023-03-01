@@ -1,0 +1,46 @@
+h1{
+    text-align: center;
+}
+
+.players,
+.game{
+    background: none!important;
+    border: none!important;
+}
+.btn:active,
+.btn:focus,
+.btn.activ{
+    box-shadow: none!important;
+}
+
+.removeAll{
+    width: 100%;
+}
+
+#SandBox{
+    margin-top: 10vh;
+    text-align: center;
+}
+
+.card{
+    margin-top: 2vh;
+}
+
+.categoryTruthDare{
+    border: 1px solid black;
+    border-radius: 1em;
+    margin: 0 30vw;
+    padding: 2vh 0;
+}
+
+.choixTD .btn{
+    padding: 2em;
+}
+
+.nextPlayerTD{
+    border:1px solid black;
+    margin-top: 2vh;
+    width: 100vw;
+    position: absolute;
+    bottom: 0;
+}

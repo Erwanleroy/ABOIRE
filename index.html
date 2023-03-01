@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--172.20.10.5-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A boire 🍻 !</title>
+    <script src="jquery.js"></script>
+    <script src="bootstrap.js"></script>
+    <script src="w3.js"></script>
+    <script src="manageUser.js"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <!--NavaBar-->
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">A Boire 🍻 !</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <button class="btn btn-primary players" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Qui joue ?</button>
+              <button class="btn btn-primary game" type="button" data-bs-toggle="offcanvas" data-bs-target="#choixDuJeu" aria-controls="choixDuJeu">Quel jeu ?</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <!--Choix des joueurs-->
+      <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas-header">
+          <h3 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Qui trinque 🍻 ?</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <div class="listeDesJoueurs">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control newPlayer" placeholder="Lache ton blaze">
+              <button class="btn btn-dark addUser" type="button">Tchin !</button>
+            </div>
+              <button class="btn btn-danger removeAll" type="button">On vire tout le monde 🚮 ?</button>
+            </div>
+        </div>
+      </div>
+      <!--Choix du jeu-->
+      <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="choixDuJeu" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas-header">
+          <h3 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">On joue a quoi 🎲 ?</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="input-group mb-3">
+            <div w3-include-html="lesJeux.html"></div> 
+          </div>
+        </div>
+      </div>
+      <div id="SandBox">Salutations, alcoolique (peut-être🧐), clic sur les items au dessus pour choisir qui joue et a quel jeu</div>
+
+      <script>
+        w3IncludeHTML();
+      </script>
+    </body>
+</html>
